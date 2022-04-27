@@ -19,8 +19,10 @@ void test1()
 	}
 	a[i]->next =NULL;
 	SListPrint(*a);
-	SListNode* pos= SListFind(*a,0);
-	SListInsertPre(a, pos, 40);
+	SListNode* pos= SListFind(*a,4);
+	SListEraseAfter(pos);
+	//SListErase(a, pos);
+	
 	SListPrint(*a);
 	//SListPopFront(a);
 	//SListPopFront(a);

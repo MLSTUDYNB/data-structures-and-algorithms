@@ -130,5 +130,49 @@ void SListInsertPre(SListNode** pphead, SListNode* pos, SLTypeDate x)
 		NewNode->next = pos;
 		cur->next = NewNode;
 	}
+}
+
+void SListInsertAfter(SListNode* pos, SLTypeDate x)
+{
+	assert(pos);
+	SListNode* NewNode = BuySListNode(x);
+	NewNode->next = pos->next;
+	pos->next = NewNode;
+}
+
+void SListErase(SListNode** pphead, SListNode* pos)
+{
+	assert(pphead);
+	assert(pos);
+	if (pos == *pphead)
+	{
+		//*pphead = (*pphead)->next;
+		//free(pos);
+		//pos = NULL;
+		SListPopFront(pphead);
+	}
+	else
+	{
+		SListNode* cur = *pphead;
+		while (cur->next != pos)
+		{
+			cur = cur->next;
+		}
+		cur->next = pos->next;
+		free(pos);
+		pos = NULL;
+	}
 	
+}
+
+void SListEraseAfter(SListNode* pos)
+{
+	assert(pos);
+	if (pos->next == NULL)
+	{
+		return;
+	}
+	SListNode* cur = pos->next->next;
+	free(pos->next);
+	pos->next = cur;
 }

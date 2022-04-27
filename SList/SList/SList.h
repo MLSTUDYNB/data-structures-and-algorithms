@@ -35,5 +35,12 @@ SListNode* SListFind(SListNode* phead, SLTypeDate x);
 
 //在查找位置之前插入
 void SListInsertPre(SListNode** pphead,SListNode* pos, SLTypeDate x);
+
 //在查找位置之后插入
+void SListInsertAfter(SListNode* pos, SLTypeDate x);
+
 //删除查找位置的节点
+void SListErase(SListNode** pphead, SListNode* pos);
+
+//删除查找位置之后的节点
+void SListEraseAfter(SListNode* pos);
