@@ -42,7 +42,7 @@ StackTypeDate StackTop(Stack* ps)
 {
 	assert(ps);
 	assert(!StackEmpty(ps));
-	return ps->arr[ps->top];
+	return ps->arr[ps->top-1];
 }
 
 int StackSize(Stack* ps)

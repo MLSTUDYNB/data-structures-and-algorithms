@@ -6,6 +6,7 @@ void test1()
 {
 	Queue s;
 	QueueInit(&s);
+
 }
 
 int main()
