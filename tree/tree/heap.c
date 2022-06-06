@@ -16,38 +16,64 @@ void swap(HPDataType* a, HPDataType* b)
 	*b = c;
 }
 
-void adjustup(Heap* hp, int child)
+//void adjustup(Heap* hp, int child)
+//{
+//	//int father = (child - 1) / 2;
+//	//while (child > 0)
+//	//{
+//	//	if (hp->arr[child] < hp->arr[father])
+//	//	{
+//	//		swap(&(hp->arr[child]), &(hp->arr[father]));
+//	//		child = father;
+//	//		father = (child - 1) / 2;
+//	//	}	
+//	//	else
+//	//		break;
+//	//}
+//	int father = (child - 1) / 2;
+//	if (child <= 0||  hp->arr[father]<= hp->arr[child] )
+//		return;
+//	swap(&(hp->arr[child]), &(hp->arr[father]));
+//	adjustup(hp, father);
+//}
+//
+//
+//void adjustdown(Heap* hp, int father)
+//{
+//	int child = 2 * father + 1;
+//	while (child < hp->size)
+//	{
+//		if (child < hp->size-1&&hp->arr[child] > hp->arr[child + 1])
+//			child++;
+//		if (hp->arr[child] < hp->arr[father])
+//		{
+//			swap(&(hp->arr[child]), &(hp->arr[father]));
+//			father=child;
+//			child = 2 * father + 1;
+//		}
+//		else
+//			break;
+//	}
+//}
+
+void adjustup(HPDataType* a, int child)
 {
 	int father = (child - 1) / 2;
-	while (child > 0)
-	{
-		if (hp->arr[child] < hp->arr[father])
-		{
-			swap(&(hp->arr[child]), &(hp->arr[father]));
-			child = father;
-			father = (child - 1) / 2;
-		}	
-		else
-			break;
-	}
+	if (child <= 0 || a[father] <= a[child])
+		return;
+	swap(&a[child], &a[father]);
+	adjustup(a, father);
 }
 
-void adjustdown(Heap* hp, int father)
+void adjustdown(HPDataType* a,int n, int father)
 {
 	int child = 2 * father + 1;
-	while (child < hp->size)
-	{
-		if (child < hp->size-1&&hp->arr[child] > hp->arr[child + 1])
-			child++;
-		if (hp->arr[child] < hp->arr[father])
-		{
-			swap(&(hp->arr[child]), &(hp->arr[father]));
-			father=child;
-			child = 2 * father + 1;
-		}
-		else
-			break;
-	}
+	if (child < n - 1&&a[child + 1] < a[child])
+		child++;
+	if (child > n - 1 || a[father] <= a[child])
+		return;
+	swap(&a[child], &a[father]);
+	adjustdown(a, n, child);
 }
 
 void HeapPush(Heap* hp, HPDataType x)
@@ -66,7 +92,7 @@ void HeapPush(Heap* hp, HPDataType x)
 	hp->size++;
 
 	//向上调整
-	adjustup(hp,hp->size-1);
+	adjustup(hp->arr,hp->size-1);
 }
 
 void HeapPop(Heap* hp)
@@ -77,7 +103,7 @@ void HeapPop(Heap* hp)
 	swap(&(hp->arr[0]), &(hp->arr[hp->size-1]));
 	hp->size--;
 	//向下调整
-	adjustdown(hp,0);
+	adjustdown(hp->arr,hp->size,0);
 }
 
 void HeapDestrop(Heap* hp)

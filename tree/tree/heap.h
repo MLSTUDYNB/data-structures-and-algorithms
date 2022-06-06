@@ -22,3 +22,13 @@ void HeapPop(Heap* hp);
 void HeapDestrop(Heap* hp);
 
 void HeapPrint(Heap* hp);
+
+//void adjustup(Heap* hp, int child);
+//
+//void adjustdown(Heap* hp, int father);
+
+void adjustup(HPDataType* a, int child);
+
+void adjustdown(HPDataType* a, int n, int father);
+
+void swap(HPDataType* a, HPDataType* b);
