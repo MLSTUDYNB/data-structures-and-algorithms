@@ -3,8 +3,9 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-typedef int BTDataType;
+typedef char BTDataType;
 
 typedef struct BinaryTreeNode
 {
@@ -41,4 +42,7 @@ void BinaryTreePostOrder(BTNode* root);
 void BinaryTreeLevelOrder(BTNode* root);
 
 // 判断二叉树是否是完全二叉树
-int BinaryTreeComplete(BTNode* root);
+bool BinaryTreeComplete(BTNode* root);
+
+//深度
+int TreeDepth(BTNode* root);

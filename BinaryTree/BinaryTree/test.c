@@ -36,12 +36,57 @@ void test1()
 	//BinaryTreePrevOrder(root);
 	//BinaryTreeInOrder(root);
 	//BinaryTreePostOrder(root);
-	int ret=BinaryTreeSize(root);
+	//int ret=BinaryTreeSize(root);
+	//printf("%d\n", ret);
+
+	//int ret = BinaryTreeLeafSize(root);
+	//printf("%d\n", ret);
+	//int ret = BinaryTreeLevelKSize(root,1);
+	//printf("%d\n", ret);
+	int ret = TreeDepth(root);
 	printf("%d\n", ret);
+
+	BinaryTreeLevelOrder(root);
+
+	printf("%d\n",BinaryTreeComplete(root));
+	
+}
+BTNode* BuyNode1()
+{
+	BTNode* Node = (BTNode*)malloc(sizeof(BTNode));
+	Node->left = Node->right = NULL;
+	return Node;
+}
+BTNode* BinaryTreeCreate(BTDataType* a, int* pi)
+{
+	if (a[*pi] == '#' || a[*pi] == '\0')
+	{
+		(*pi)++;
+		return NULL;
+	}
+	BTNode* cur = BuyNode1();
+	cur->data = a[*pi];
+	(*pi)++;
+	cur->left = BinaryTreeCreate(a, pi);
+	cur->right =BinaryTreeCreate(a, pi);
+	
+	return cur;
+}
+
+void test2()
+{
+	char arr[101];
+	int i = 0;
+	scanf("%s", arr);
+	BTNode* root = BinaryTreeCreate(arr, &i);
+
+	BinaryTreePrevOrder(root);
 }
 
 int main()
 {
-	test1();
+	//test1();
+	test2();
 	return 0;
 }
+
