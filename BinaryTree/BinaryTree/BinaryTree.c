@@ -169,7 +169,18 @@ bool BinaryTreeComplete(BTNode* root)
 	return true;
 }
 
+void BTFree(BTNode* root)
+{
+	if (root == NULL)
+		return;
+	BTFree(root->left);
+	BTFree(root->right);
+	free(root);
+}
+
 void BinaryTreeDestory(BTNode** root)
 {
-
+	BTNode* cur = *root;
+	BTFree(cur);
+	*root = NULL;
 }

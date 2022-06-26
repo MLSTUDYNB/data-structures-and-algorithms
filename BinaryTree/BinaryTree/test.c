@@ -43,13 +43,13 @@ void test1()
 	//printf("%d\n", ret);
 	//int ret = BinaryTreeLevelKSize(root,1);
 	//printf("%d\n", ret);
-	int ret = TreeDepth(root);
-	printf("%d\n", ret);
+	//int ret = TreeDepth(root);
+	//printf("%d\n", ret);
 
-	BinaryTreeLevelOrder(root);
+	//BinaryTreeLevelOrder(root);
 
-	printf("%d\n",BinaryTreeComplete(root));
-	
+	//printf("%d\n",BinaryTreeComplete(root));
+	BinaryTreeDestory(&root);
 }
 BTNode* BuyNode1()
 {
@@ -85,8 +85,8 @@ void test2()
 
 int main()
 {
-	//test1();
-	test2();
+	test1();
+	//test2();
 	return 0;
 }
 
