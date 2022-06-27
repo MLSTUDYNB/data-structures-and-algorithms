@@ -17,7 +17,10 @@ int main()
 	int arr[10] = { 9,1,2,5,7,4,8,6,3,5};
 	//InsertSort(arr, 10);
 	//ShellSort(arr, 10);
-	SelectSort(arr, 10);
+	//SelectSort(arr, 10);
+	//BubbleSort(arr, 10);
+	//HeapSort(arr, 10);
+	QuickSort(arr, 0, 9);
 	print(arr, 10);
 	return 0;
 }
