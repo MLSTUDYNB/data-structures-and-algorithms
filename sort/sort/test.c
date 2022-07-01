@@ -20,7 +20,10 @@ int main()
 	//SelectSort(arr, 10);
 	//BubbleSort(arr, 10);
 	//HeapSort(arr, 10);
-	QuickSort(arr, 0, 9);
+	//QuickSort(arr, 0, 9);
+	//QuickSortNonR1(arr, 0, 9);
+	QuickSortNonR2(arr, 0, 9);
+
 	print(arr, 10);
 	return 0;
 }

@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 
 #include "sort.h"
+#include "stack.h"
+#include "queue.h"
 
 void swap(int* a, int* b)
 {
@@ -211,17 +213,117 @@ int PartSort2(int* a, int left, int right)
 	return keyi;
 }
 // 快速排序前后指针法
-int PartSort3(int* a, int left, int right);
+int PartSort3(int* a, int left, int right)
+{
+	int keyi = left;
+	int front = keyi + 1;
+	int back = keyi;
+	while (front <= right)
+	{
+		if (a[front] <= a[keyi])
+		{
+			back++;
+			swap(&a[front], &a[back]);
+		}
+		front++;
+	}
+	swap(&a[back], &a[keyi]);
+	keyi = back;
+	return keyi;
+}
+
+int ThreeIn(int* a, int left, int right)
+{
+	int middle = left + (right - left) / 2;
+	if (a[middle] < a[left])
+	{
+		if (a[left] < a[right])
+			return left;
+		else if (a[middle] < a[right])
+			return right;
+		else
+			return middle;
+	}
+	else
+	{
+		if (a[middle] < a[right])
+			return middle;
+		else if (a[left] < a[right])
+			return right;
+		else
+			return left;
+	}
+}
 void QuickSort(int* a, int left, int right)
 {
 	if (left >= right)
 		return;
 	int keyi = left;
+	int x = ThreeIn(a, left, right);
+	swap(&a[keyi], &a[x]);
 	//keyi = PartSort1(a, left, right);
-	keyi = PartSort2(a, left, right);
+	//keyi = PartSort2(a, left, right);
+	keyi = PartSort3(a, left, right);
 	QuickSort(a, left, keyi - 1);
 	QuickSort(a, keyi + 1, right);
 }
 
 // 快速排序 非递归实现
-void QuickSortNonR(int* a, int left, int right);
+void QuickSortNonR1(int* a, int left, int right)
+{
+
+	Stack p;
+	InitStack(&p);
+	StackPush(&p, left);
+	StackPush(&p, right);
+	while (!StackEmpty(&p))
+	{
+		right = StackTop(&p);
+		StackPop(&p);
+		left = StackTop(&p);
+		StackPop(&p);
+		int keyi = PartSort3(a, left, right);
+		if (keyi + 1 < right)
+		{
+			StackPush(&p, keyi+1);
+			StackPush(&p, right);
+		}
+		if (keyi - 1 > left)
+		{
+			StackPush(&p, left);
+			StackPush(&p, keyi-1);
+		}
+	}
+	StackDestroy(&p);
+}
+
+void QuickSortNonR2(int* a, int left, int right)
+{
+	Queue p;
+	QueueInit(&p);
+	QueuePush(&p, right);
+	QueuePush(&p, left);
+	while (!QueueEmpty(&p))
+	{
+		right = QueueFront(&p);
+		QueuePop(&p);
+		left= QueueFront(&p);
+		QueuePop(&p);
+		int keyi = PartSort3(a, left, right);
+		
+		if (keyi - 1 > left)
+		{
+			
+			QueuePush(&p, keyi - 1);
+			QueuePush(&p, left);
+		}
+		if (keyi + 1 < right)
+		{
+			
+			QueuePush(&p, right);
+			QueuePush(&p, keyi + 1);
+		}
+	}
+	QueueDestroy(&p);
+
+}

@@ -29,4 +29,6 @@ int PartSort3(int* a, int left, int right);
 void QuickSort(int* a, int left, int right);
 
 // 快速排序 非递归实现
-void QuickSortNonR(int* a, int left, int right);
+void QuickSortNonR1(int* a, int left, int right);
+
+void QuickSortNonR2(int* a, int left, int right);
