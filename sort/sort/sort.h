@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdio.h>
-
-
+#include <stdlib.h>
+#include <string.h>
 
 // 插入排序
 void InsertSort(int* a, int n);
@@ -32,3 +32,12 @@ void QuickSort(int* a, int left, int right);
 void QuickSortNonR1(int* a, int left, int right);
 
 void QuickSortNonR2(int* a, int left, int right);
+
+// 归并排序递归实现
+void MergeSort(int* a, int n);
+// 归并排序非递归实现
+void MergeSortNonR(int* a, int n);
+
+// 计数排序
+void CountSort(int* a, int n);
+

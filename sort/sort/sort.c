@@ -327,3 +327,115 @@ void QuickSortNonR2(int* a, int left, int right)
 	QueueDestroy(&p);
 
 }
+
+void merge_sort(int* a, int* temp, int left,int right)
+{
+	//控制返回的条件
+	if (left >= right)
+		return;
+	int mid = left + (right - left) / 2;
+	//不断分割区间left,mid],[mid+1,right]
+
+	merge_sort(a, temp, left, mid);
+	merge_sort(a, temp, mid+1, right);
+
+	int L1 = left, R1 = mid;
+	int L2 = mid+1, R2 = right;
+	int i = L1;
+	while (L1 <= R1 && L2 <= R2)
+	{
+		if (a[L1] <= a[L2])
+			temp[i++] = a[L1++];
+		else
+			temp[i++] = a[L2++];
+	}
+	while (L1 <= R1)
+		temp[i++] = a[L1++];
+	while (L2 <= R2)
+		temp[i++] = a[L2++];
+	memcpy(a+left, temp+left, sizeof(int) * (right - left+1));
+}
+
+void MergeSort(int* a, int n)
+{
+	int* temp = (int*)malloc(sizeof(int) * n);
+
+	merge_sort(a, temp, 0,n-1);
+
+
+	free(temp);
+}
+
+void MergeSortNonR(int* a, int n)
+{
+	int* temp = (int*)malloc(sizeof(int) * n);
+	if (temp == NULL)
+		exit(-1);
+	int gap = 1;
+
+	while (gap < n)
+	{
+		int left1 = 0;
+		while (left1<n)
+		{
+			int right2 = left1 + 2*gap-1;
+			int mid = (left1 + right2) / 2;
+			int right1 = mid, left2 = mid + 1;
+			int i = left1; int x = left1;
+			if (right1 >= n)
+			{
+				right1 = n - 1;
+				left2 = n;
+				right2 = n-1;
+			}
+			else if (left2 >= n)
+			{
+				left2 = n;
+				right2 = n-1;
+			}
+			else if (right2 >= n)
+			{
+				right2 = n - 1;
+			}
+			while (left1 <= right1 && left2 <= right2)
+			{
+				if (a[left1] <= a[left2])
+					temp[i++] = a[left1++];
+				else
+					temp[i++] = a[left2++];
+			}
+			while (left1 <= right1)
+				temp[i++] = a[left1++];
+			while (left2 <= right2)
+				temp[i++] = a[left2++];
+
+			memcpy(a + x, temp + x, sizeof(int) * (right2 - x + 1));
+			left1 = right2 + 1;
+		}
+		gap *= 2;
+	}
+	free(temp);
+}
+
+void CountSort(int* a, int n)
+{
+	int min = a[0], max = a[0];
+	for (int i = 0; i < n; i++)
+	{
+		if (min > a[i])
+			min = a[i];
+		if (max < a[i])
+			max = a[i];
+	}
+	int range = max - min+1;
+	int* temp = calloc(range, sizeof(int));
+	for (int i = 0; i < n; i++)
+	{
+		temp[a[i] - min]++;
+	}
+	for (int i = 0,j=0; i < range; i++)
+	{
+		while (temp[i]--)
+			a[j++] = i + min;
+	}
+}

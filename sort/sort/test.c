@@ -22,8 +22,10 @@ int main()
 	//HeapSort(arr, 10);
 	//QuickSort(arr, 0, 9);
 	//QuickSortNonR1(arr, 0, 9);
-	QuickSortNonR2(arr, 0, 9);
-
+	//QuickSortNonR2(arr, 0, 9);
+	//MergeSort(arr, 10);
+	//MergeSortNonR(arr, 10);
+	CountSort(arr, 10);
 	print(arr, 10);
 	return 0;
 }
